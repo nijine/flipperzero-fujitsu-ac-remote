@@ -1,15 +1,13 @@
-# Mitsubishi AC Remote
+# Fujitsu AC Remote
 
-Mitsubishi Electric AC remote control for Flipper Zero.
+Fujitsu AC remote control for Flipper Zero.
+
+This is currently a work-in-progress fork of (achistyakov/flipperzero-mitsubishi-ac-remote)[https://github.com/achistyakov/flipperzero-mitsubishi-ac-remote], as it serves as a good base to make something similar for use with Fujitsu ACs.
 
 ![Screenshot](img/screenshot.png)
 
 ## Building
 ```shell
-# Clone repository
-git clone https://github.com/achistyakov/flipperzero-mitsubishi-ac-remote.git
-cd mitsubishi_ac_remote
-
 # Build the application
 ufbt build
 
