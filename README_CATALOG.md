@@ -1,2 +1,2 @@
-# Mitsubishi AC Remote
-Mitsubishi Electric Air Conditioner remote control.
+# Fujitsu AC Remote
+Fujitsu Electric Air Conditioner remote control.

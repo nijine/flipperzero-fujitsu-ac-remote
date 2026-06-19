@@ -15,7 +15,7 @@
         "SConscript": "python",
         "SConstruct": "python",
         "*.fam": "python",
-        "mitsubishi_ac_remote_icons.h": "c"
+        "fujitsu_ac_remote_icons.h": "c"
     },
     "cortex-debug.registerUseNaturalFormat": false,
     "python.analysis.typeCheckingMode": "off",
