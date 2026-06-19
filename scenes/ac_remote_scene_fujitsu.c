@@ -8,6 +8,7 @@ typedef enum {
     button_temp_down,
     button_vane,
     label_temperature,
+    label_power_state,
 } button_id;
 
 const Icon* mode[4][2] = {
@@ -119,7 +120,7 @@ void ac_remote_scene_fujitsu_on_enter(void* context) {
         &I_off_hover_19x20,
         ac_remote_scene_universal_common_item_callback,
         context);
-    ac_remote_panel_add_icon(ac_remote_panel, 9, 39, &I_off_text_14x5);
+    ac_remote_panel_add_label(ac_remote_panel, label_power_state, 10, 44, FontSecondary, "ON");
     ac_remote_panel_add_item(
         ac_remote_panel,
         button_mode,
@@ -207,13 +208,16 @@ bool ac_remote_scene_fujitsu_on_event(void* context, SceneManagerEvent event) {
         } else if(event_type == AC_RemoteCustomEventTypeButtonSelected) {
             if(event_value != button_power) {
                 ac_remote->app_state.power = HvacFujitsuPowerOn;
+                ac_remote_panel_label_set_string(ac_remote_panel, label_power_state, "ON");
             }
             switch(event_value) {
             case button_power:
                 if(ac_remote->app_state.power == HvacFujitsuPowerOn) {
                     ac_remote->app_state.power = HvacFujitsuPowerOff;
+                    ac_remote_panel_label_set_string(ac_remote_panel, label_power_state, "OFF");
                 } else {
                     ac_remote->app_state.power = HvacFujitsuPowerOn;
+                    ac_remote_panel_label_set_string(ac_remote_panel, label_power_state, "ON");
                 }
                 break;
             case button_mode:
