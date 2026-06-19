@@ -29,6 +29,21 @@ ufbt build
 ufbt launch
 ```
 
+If you encounter `ApiTooNew` or `ApiTooOld` errors when launching with custom firmware, you need to point `ufbt` to the firmware's matching SDK:
+1. Build the firmware distribution / SDK in your firmware repository:
+   ```shell
+   ./fbt fw_dist
+   ```
+2. Configure `ufbt` to use the local SDK zip:
+   ```shell
+   ufbt update --hw-target f7 --local /path/to/flipperzero-firmware/dist/f7-D/flipper-z-f7-sdk-local.zip
+   ```
+3. Clean the app build state and launch:
+   ```shell
+   ufbt -c
+   ufbt launch
+   ```
+
 ### 2. Building inside Flipper Firmware tree with `fbt`
 If your Flipper is running a custom firmware:
 1. Copy this folder to the `applications_user` directory in your Flipper firmware repository:

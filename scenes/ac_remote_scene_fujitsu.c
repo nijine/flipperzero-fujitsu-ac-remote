@@ -120,7 +120,7 @@ void ac_remote_scene_fujitsu_on_enter(void* context) {
         &I_off_hover_19x20,
         ac_remote_scene_universal_common_item_callback,
         context);
-    ac_remote_panel_add_label(ac_remote_panel, label_power_state, 10, 44, FontSecondary, "ON");
+    ac_remote_panel_add_label(ac_remote_panel, label_power_state, 10, 44, FontSecondary, "on");
     ac_remote_panel_add_item(
         ac_remote_panel,
         button_mode,
@@ -208,16 +208,16 @@ bool ac_remote_scene_fujitsu_on_event(void* context, SceneManagerEvent event) {
         } else if(event_type == AC_RemoteCustomEventTypeButtonSelected) {
             if(event_value != button_power) {
                 ac_remote->app_state.power = HvacFujitsuPowerOn;
-                ac_remote_panel_label_set_string(ac_remote_panel, label_power_state, "ON");
+                ac_remote_panel_label_set_string(ac_remote_panel, label_power_state, "on");
             }
             switch(event_value) {
             case button_power:
                 if(ac_remote->app_state.power == HvacFujitsuPowerOn) {
                     ac_remote->app_state.power = HvacFujitsuPowerOff;
-                    ac_remote_panel_label_set_string(ac_remote_panel, label_power_state, "OFF");
+                    ac_remote_panel_label_set_string(ac_remote_panel, label_power_state, "off");
                 } else {
                     ac_remote->app_state.power = HvacFujitsuPowerOn;
-                    ac_remote_panel_label_set_string(ac_remote_panel, label_power_state, "ON");
+                    ac_remote_panel_label_set_string(ac_remote_panel, label_power_state, "on");
                 }
                 break;
             case button_mode:
