@@ -97,6 +97,7 @@ void ac_remote_scene_fujitsu_on_enter(void* context) {
         ac_remote->app_state.vane = HvacFujitsuVaneAuto;
         ac_remote->app_state.temperature = 70;
     }
+    ac_remote->app_state.power = HvacFujitsuPowerOn;
 
     hvac_fujitsu_set_mode(ac_remote->hvac_fujitsu_data, ac_remote->app_state.mode);
     hvac_fujitsu_set_fan_speed(ac_remote->hvac_fujitsu_data, ac_remote->app_state.fan);
@@ -204,10 +205,16 @@ bool ac_remote_scene_fujitsu_on_event(void* context, SceneManagerEvent event) {
             hvac_fujitsu_send(ac_remote->hvac_fujitsu_data);
             notification_message(notifications, &sequence_blink_stop);
         } else if(event_type == AC_RemoteCustomEventTypeButtonSelected) {
-            ac_remote->app_state.power = HvacFujitsuPowerOn;
+            if(event_value != button_power) {
+                ac_remote->app_state.power = HvacFujitsuPowerOn;
+            }
             switch(event_value) {
             case button_power:
-                ac_remote->app_state.power = HvacFujitsuPowerOff;
+                if(ac_remote->app_state.power == HvacFujitsuPowerOn) {
+                    ac_remote->app_state.power = HvacFujitsuPowerOff;
+                } else {
+                    ac_remote->app_state.power = HvacFujitsuPowerOn;
+                }
                 break;
             case button_mode:
                 ac_remote->app_state.mode++;
