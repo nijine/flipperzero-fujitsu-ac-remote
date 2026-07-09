@@ -102,6 +102,7 @@ void hvac_fujitsu_send(uint8_t* packet) {
             case HvacFujitsuModeCool: raw_mode = 0x01; break;
             case HvacFujitsuModeDry:  raw_mode = 0x02; break;
             case HvacFujitsuModeAuto: raw_mode = 0x00; break;
+            case HvacFujitsuModeFan:  raw_mode = 0x03; break;
             default:                  raw_mode = 0x00; break;
         }
         data[9] = raw_mode;

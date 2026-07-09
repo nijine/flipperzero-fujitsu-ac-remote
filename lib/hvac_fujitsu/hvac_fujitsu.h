@@ -26,6 +26,7 @@ typedef enum {
     HvacFujitsuModeCool = 1,
     HvacFujitsuModeDry = 2,
     HvacFujitsuModeAuto = 3,
+    HvacFujitsuModeFan = 4,
 } HvacFujitsuMode;
 
 typedef enum {

@@ -11,11 +11,12 @@ typedef enum {
     label_power_state,
 } button_id;
 
-const Icon* mode[4][2] = {
+const Icon* mode[5][2] = {
     [HvacFujitsuModeHeat] = {&I_heat_19x20, &I_heat_hover_19x20},
     [HvacFujitsuModeCold] = {&I_cold_19x20, &I_cold_hover_19x20},
     [HvacFujitsuModeDry] = {&I_dry_19x20, &I_dry_hover_19x20},
-    [HvacFujitsuModeAuto] = {&I_auto_19x20, &I_auto_hover_19x20}};
+    [HvacFujitsuModeAuto] = {&I_auto_19x20, &I_auto_hover_19x20},
+    [HvacFujitsuModeFan] = {&I_fan_19x20, &I_fan_hover_19x20}};
 const Icon* fan[7][2] = {
     [HvacFujitsuFanSpeedAuto] = {&I_auto_19x20, &I_auto_hover_19x20},
     [HvacFujitsuFanSpeed1] = {&I_fan_speed_1_19x20, &I_fan_speed_1_hover_19x20},
@@ -46,7 +47,7 @@ bool ac_remote_load_settings(ACRemoteAppSettings* app_state) {
         if(!flipper_format_read_header(ff, header, &version)) break;
         if(!furi_string_equal(header, "AC Remote") || (version != 1)) break;
         if(!flipper_format_read_uint32(ff, "Mode", &app_state->mode, 1)) break;
-        if(app_state->mode > HvacFujitsuModeAuto) break;
+        if(app_state->mode > HvacFujitsuModeFan) break;
         if(!flipper_format_read_uint32(ff, "Temperature", &app_state->temperature, 1)) break;
         if(app_state->temperature > HVAC_FUJITSU_TEMPERATURE_FAHRENHEIT_MAX || app_state->temperature < HVAC_FUJITSU_TEMPERATURE_FAHRENHEIT_MIN) break;
         if(!flipper_format_read_uint32(ff, "Fan", &app_state->fan, 1)) break;
@@ -222,7 +223,7 @@ bool ac_remote_scene_fujitsu_on_event(void* context, SceneManagerEvent event) {
                 break;
             case button_mode:
                 ac_remote->app_state.mode++;
-                if(ac_remote->app_state.mode > HvacFujitsuModeAuto) {
+                if(ac_remote->app_state.mode > HvacFujitsuModeFan) {
                     ac_remote->app_state.mode = HvacFujitsuModeHeat;
                 }
                 hvac_fujitsu_set_mode(
